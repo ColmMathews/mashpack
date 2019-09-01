@@ -69,9 +69,8 @@ All multi-byte integers are packed with network byte-order.
 |-----------|------------|-------------|
 | MAPP      | `00xxxxxx` | `0x00-0x3F` |
 | STRP      | `01xxxxxx` | `0x40-0x7F` |
-| MARRAYP   | `100xxxxx` | `0x80-0x9F` |
-| INTP      | `101xxxxx` | `0xA0-0xBF` |
-| NINTP     | `111xxxxx` | `0xE0-0xFF` |
+| INTP      | `100xxxxx` | `0x80-0x9F` |
+| NINTP     | `101xxxxx` | `0xA0-0xBF` |
 | FALSE     | `11000000` | `0xC0`      |
 | TRUE      | `11000001` | `0xC1`      |
 | MAP8      | `11000010` | `0xC2`      |
@@ -104,6 +103,8 @@ All multi-byte integers are packed with network byte-order.
 | EXT32     | `11011101` | `0xDD`      |
 | RESERVED  | `11011110` | `0xDE`      |
 | NULL      | `11011111` | `0xDF`      |
+| MARRAYP   | `111xxxxx` | `0xE0-0xFF` |
+|___________|____________|_____________|
 
 ### Map Family (`MAPP`, `MAP8`, `MAP16`, `MAP32`)
 
@@ -166,7 +167,7 @@ where XXXXXX_XXXXXXXX_XXXXXX_XXXXXXXX is a 32-bit unsigned integer
 ```
 MARRAYP stores a mapping of up to 63 elements
 +--------+~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
-|100XXXXX| N Mashpack-encoded objects |
+|111XXXXX| N Mashpack-encoded objects |
 +--------+~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
 where XXXXX is a 5-bit unsigned integer
 
@@ -243,13 +244,13 @@ where XXXXXX_XXXXXXXX_XXXXXX_XXXXXXXX is a 32-bit unsigned integer
 ```
 INTP stores 5-bit positive integer
 +--------+
-|101XXXXX|
+|100XXXXX|
 +--------+
 where XXXXX is a 5-bit unsigned integer
 
 NINTP stores 5-bit negative integer
 +--------+
-|111YYYYY|
+|101YYYYY|
 +--------+
 where YYYYY is a 5-bit unsigned integer
 
